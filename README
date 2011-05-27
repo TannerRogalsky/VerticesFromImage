@@ -1,0 +1,7 @@
+This is a small tool for obtaining vertices from an image.
+It is ideal for simplifying the process of creating an accurate hitbox from an image when dealing with a 2D physics engine.
+
+TODO:
+- return convex polygon instead of a loose collection of points
+- add other image type support besides PNGs
+- add the ability to specify the level of detail/number of vertices returned
