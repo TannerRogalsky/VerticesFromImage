@@ -30,40 +30,40 @@ public class VerticesFromImage {
 	private boolean containsVertex(Image img, int x, int y){
 		int w = 3, h = 3;
 		int[] pixels = new int[w * h];
-        PixelGrabber pg = new PixelGrabber(img, x, y, w, h, pixels, 0, w);
-        try {
-            pg.grabPixels();
-        } catch (InterruptedException e) {
-            System.err.println("interrupted waiting for pixels!");
-            return false;
-        }
-        if ((pg.getStatus() & ImageObserver.ABORT) != 0) {
-            System.err.println("image fetch aborted or errored");
-            return false;
-        }
-        
-        boolean allPixelsAreOpaque = true;
-        for (int j = 0; j < h; j++) {
-            for (int i = 0; i < w; i++) {
-            	if (new Color(pixels[j * w + i], true).getAlpha() < 100){
-            		allPixelsAreOpaque = false;
-            	}
-            }
-        }
-        
-        if ((new Color(pixels[1 * w + 1], true).getAlpha() > 100) && (!allPixelsAreOpaque)){
-        	if ((new Color(pixels[1 * w + 2], true).getAlpha() > 100) && (new Color(pixels[1 * w + 0], true).getAlpha() > 100) &&
-        			(new Color(pixels[0 * w + 1], true).getAlpha() > 100) && (new Color(pixels[2 * w + 1], true).getAlpha() > 100)){
-        		return true;
-        	}else if ((new Color(pixels[1 * w + 2], true).getAlpha() > 100) && (new Color(pixels[1 * w + 0], true).getAlpha() > 100) ||
-        			(new Color(pixels[0 * w + 1], true).getAlpha() > 100) && (new Color(pixels[2 * w + 1], true).getAlpha() > 100)){
-        		return false;
-        	}else{
-        		return true;
-        	}
-        }
-        
-        return false;
+		PixelGrabber pg = new PixelGrabber(img, x, y, w, h, pixels, 0, w);
+		try {
+			pg.grabPixels();
+		} catch (InterruptedException e) {
+			System.err.println("interrupted waiting for pixels!");
+			return false;
+		}
+		if ((pg.getStatus() & ImageObserver.ABORT) != 0) {
+			System.err.println("image fetch aborted or errored");
+			return false;
+		}
+		
+		boolean allPixelsAreOpaque = true;
+		for (int j = 0; j < h; j++) {
+			for (int i = 0; i < w; i++) {
+				if (new Color(pixels[j * w + i], true).getAlpha() < 100){
+					allPixelsAreOpaque = false;
+				}
+			}
+		}
+		
+		if ((new Color(pixels[1 * w + 1], true).getAlpha() > 100) && (!allPixelsAreOpaque)){
+			if ((new Color(pixels[1 * w + 2], true).getAlpha() > 100) && (new Color(pixels[1 * w + 0], true).getAlpha() > 100) &&
+					(new Color(pixels[0 * w + 1], true).getAlpha() > 100) && (new Color(pixels[2 * w + 1], true).getAlpha() > 100)){
+				return true;
+			}else if ((new Color(pixels[1 * w + 2], true).getAlpha() > 100) && (new Color(pixels[1 * w + 0], true).getAlpha() > 100) ||
+					(new Color(pixels[0 * w + 1], true).getAlpha() > 100) && (new Color(pixels[2 * w + 1], true).getAlpha() > 100)){
+				return false;
+			}else{
+				return true;
+			}
+		}
+		
+		return false;
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class VerticesFromImage {
 		
 		BufferedImage img = null;
 		try {
-		    img = ImageIO.read(new File("square.png"));
+			img = ImageIO.read(new File("square.png"));
 		} catch (IOException e) {
 		}
 		VerticesFromImage v = new VerticesFromImage(img);
