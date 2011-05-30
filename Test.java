@@ -25,7 +25,7 @@ public class Test extends JFrame {
 		poly = new Polygon();
 		
 		try {
-			img = ImageIO.read(new File("clamps.png"));
+			img = ImageIO.read(new File("circle.png"));
 		} catch (IOException e) {
 		}
 		long t = System.nanoTime();
@@ -35,9 +35,10 @@ public class Test extends JFrame {
 			poly.addPoint(p.x, p.y);
 		}
 		System.out.println("Seconds elapsed: " + (System.nanoTime() - t)/1000000000);
+		System.out.println(poly.npoints);
 		
 		JPanel panel = new MyPanel();
-        this.getContentPane().add(panel);
+		this.getContentPane().add(panel);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.pack();
@@ -46,21 +47,21 @@ public class Test extends JFrame {
 	
 	class MyPanel extends JPanel {
 
-	    public MyPanel() {
-	        setBorder(BorderFactory.createLineBorder(Color.black));
-	    }
+		public MyPanel() {
+			setBorder(BorderFactory.createLineBorder(Color.black));
+		}
 
-	    public Dimension getPreferredSize() {
-	        return new Dimension(img.getWidth(), img.getHeight());
-	    }
+		public Dimension getPreferredSize() {
+			return new Dimension(img.getWidth(), img.getHeight());
+		}
 
-	    public void paintComponent(Graphics g) {
-	        super.paintComponent(g);       
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);	   
 
-	        g.drawImage(img, 0, 0, null);
-	        g.setColor(Color.black);
-	        g.drawPolygon(poly);
-	    }  
+			g.drawImage(img, 0, 0, null);
+			g.setColor(Color.black);
+			g.drawPolygon(poly);
+		}  
 	}
 
 	/**
