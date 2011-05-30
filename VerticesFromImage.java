@@ -2,24 +2,18 @@ package com.tanner;
 
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.Point;
-import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.awt.image.PixelGrabber;
-import java.io.File;
-import java.io.IOException;
-import java.util.LinkedList;
-
-import javax.imageio.ImageIO;
+import java.util.Vector;
 
 public class VerticesFromImage {
-	private LinkedList<Point> vertices;
+	private Vector<Point> vertices;
 	
 	public VerticesFromImage(Image image){
-		vertices = new LinkedList<Point>();
+		vertices = new Vector<Point>();
 		
-		for (int j = 0; j < image.getWidth(null) - 2; j++) {
-			for (int i = 0; i < image.getHeight(null) - 2; i++) {
+		for (int j = 0; j < image.getWidth(null) - 2; j+=5) {
+			for (int i = 0; i < image.getHeight(null) - 2; i+=5) {
 				if(containsVertex(image, j, i)){
 					vertices.add(new Point(j + 1, i + 1));
 				}
@@ -69,24 +63,8 @@ public class VerticesFromImage {
 	/**
 	 * @return the vertices
 	 */
-	public LinkedList<Point> getVertices() {
-		return vertices;
-	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		
-		BufferedImage img = null;
-		try {
-			img = ImageIO.read(new File("square.png"));
-		} catch (IOException e) {
-		}
-		VerticesFromImage v = new VerticesFromImage(img);
-		for (Point p : v.getVertices()){
-			System.out.println(p.x + ", " + p.y);
-		}
+	public Point[] getVertices() {
+		return vertices.toArray(new Point[vertices.size()]);
 	}
 
 }
